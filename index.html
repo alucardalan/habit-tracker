@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Heatmap & Daily To-Do Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div>
+        <h1>Daily Habit & Task Tracker</h1>
+        <p class="subtitle">GitHub-style heatmap linked to daily to-do lists</p>
+      </div>
+      <div class="header-actions">
+        <button id="export-btn" class="btn btn-secondary">Export JSON</button>
+        <label for="import-file" class="btn btn-secondary file-label">
+          Import JSON
+          <input type="file" id="import-file" accept=".json" hidden />
+        </label>
+        <button id="clear-btn" class="btn btn-danger">Reset All</button>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Current Streak</span>
+        <span class="stat-value" id="stat-current-streak">0 days</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Longest Streak</span>
+        <span class="stat-value" id="stat-longest-streak">0 days</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Active Days</span>
+        <span class="stat-value" id="stat-active-days">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Tasks Completed</span>
+        <span class="stat-value" id="stat-total-count">0</span>
+      </div>
+    </section>
+
+    <main class="card heatmap-card">
+      <div class="heatmap-scroll-wrapper">
+        <div class="months-row" id="months-row"></div>
+        <div class="heatmap-body">
+          <div class="days-column">
+            <span></span>
+            <span>Mon</span>
+            <span></span>
+            <span>Wed</span>
+            <span></span>
+            <span>Fri</span>
+            <span></span>
+          </div>
+          <div class="heatmap-grid" id="heatmap-grid"></div>
+        </div>
+      </div>
+
+      <footer class="heatmap-footer">
+        <span class="hint-text">Select any day on the grid to manage its to-do list.</span>
+        <div class="legend">
+          <span>Less</span>
+          <span class="cell" data-level="0"></span>
+          <span class="cell" data-level="1"></span>
+          <span class="cell" data-level="2"></span>
+          <span class="cell" data-level="3"></span>
+          <span class="cell" data-level="4"></span>
+          <span>More</span>
+        </div>
+      </footer>
+    </main>
+
+    <section class="card todo-card">
+      <div class="todo-card-header">
+        <div>
+          <h2 id="selected-date-title">Today</h2>
+          <p id="selected-date-status" class="subtitle">0 tasks completed</p>
+        </div>
+        <div class="task-counter-pill">
+          <span id="completed-count-badge">0</span> / <span id="total-count-badge">0</span> done
+        </div>
+      </div>
+
+      <form id="todo-form" class="todo-form">
+        <input 
+          type="text" 
+          id="todo-input" 
+          class="todo-input" 
+          placeholder="Add a new task for this date..." 
+          autocomplete="off" 
+          required 
+        />
+        <button type="submit" class="btn btn-primary">Add Task</button>
+      </form>
+
+      <ul id="todo-list" class="todo-list"></ul>
+      <p id="empty-state" class="empty-state">No tasks created for this day yet. Add one above.</p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
